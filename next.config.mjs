@@ -15,6 +15,8 @@ const nextConfig = {
     };
     config.resolve.alias = {
       ...config.resolve.alias,
+      '@base-org/account': false,
+      '@coinbase/cdp-sdk': false,
       '@metamask/connect-evm': false,
       'accounts': false,
       '@x402/evm': false,
