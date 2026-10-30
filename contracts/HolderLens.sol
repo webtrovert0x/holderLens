@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /**
  * @title HolderLens
- * @notice On-chain audit trail and snapshot anchor for HolderLens token analytics on Bohr Chain (BOT)
+ * @notice On-chain audit trail and snapshot anchor for HolderLens token analytics on BOT Chain (BOT)
  * @dev Users pay zero protocol fees (only standard network gas).
  */
 contract HolderLens {

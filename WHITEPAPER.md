@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>On-Chain Token Distribution Analytics & Verifiable Snapshot Infrastructure</strong><br />
-  <em>Deployed on Bohr Chain (Chain ID: 968)</em><br />
+  <em>Deployed on BOT Chain Mainnet (Chain ID: 677)</em><br />
   Version 1.0 — October 2026
 </p>
 
@@ -16,12 +16,12 @@
 
 Token ownership concentration is one of the single greatest structural vulnerabilities in decentralized finance (DeFi). The vast majority of retail participants and liquidity providers enter token positions without visibility into whale dominance, wallet clustering, or supply monopolization. Furthermore, traditional off-chain analytics dashboards lack verifiability, audit trails, and immutability.
 
-**HolderLens** introduces a decentralized, verifiable token distribution analytics engine on Bohr Chain. HolderLens combines:
+**HolderLens** introduces a decentralized, verifiable token distribution analytics engine on BOT Chain. HolderLens combines:
 1. An on-chain audit and snapshot anchor protocol (`HolderLens.sol`),
 2. A dual-tier real-time indexing pipeline, and
 3. A quantitative concentration analytics engine measuring whale dominance, Gini-derived distribution tiers, and inter-snapshot drift.
 
-Every holder inspection is permanently logged on Bohr Chain through zero-fee protocol transactions, creating a transparent, public audit trail of token security checks.
+Every holder inspection is permanently logged on BOT Chain through zero-fee protocol transactions, creating a transparent, public audit trail of token security checks.
 
 ---
 
@@ -53,7 +53,7 @@ HolderLens utilizes a hybrid decentralized architecture comprising an on-chain v
                 ▼                        ▼
 ┌────────────────────────┐      ┌────────────────────────┐
 │     HolderLens.sol     │      │   Analytics & Indexer  │
-│  (Bohr Chain / ID 968) │      │  - BohrScan v2 Engine  │
+│  (BOT Chain / ID 677)  │      │  - BOTScan v2 Engine   │
 │                        │      │  - Viem RPC Multicall  │
 └────────────────────────┘      └────────┬───────────────┘
                                          │
@@ -69,11 +69,11 @@ HolderLens utilizes a hybrid decentralized architecture comprising an on-chain v
 ```
 
 ### 3.1 On-Chain Protocol Layer (`HolderLens.sol`)
-The `HolderLens` smart contract is deployed on Bohr Testnet at:
-`0x4f94b30803f2b34630D427E452c85547Df5A6274`
+The `HolderLens` smart contract is deployed on BOT Chain Mainnet at:
+`0x8A1fA6aC2442231B0D7C9250683C335713F21f7f`
 
 #### Key Invariants:
-- **Zero Protocol Fee**: The contract charges no service fees. Users pay only native Bohr Chain gas (`BOT`) to execute state changes.
+- **Zero Protocol Fee**: The contract charges no service fees. Users pay only native BOT Chain gas (`BOT`) to execute state changes.
 - **Immutable Audit Logging**: Every check emits a `HolderCheckRecorded(user, token, checkId, timestamp)` event, establishing on-chain proof-of-inspection.
 - **Verifiable Snapshot Anchoring**: Users and protocols can anchor cryptographic Merkle/Keccak hashes of full holder distributions alongside summary metrics (`totalHolders`, `top10ConcentrationBps`).
 
@@ -143,16 +143,17 @@ A positive $\Delta CR_{10}$ flags ongoing centralization (accumulation by top wa
 
 ---
 
-## 6. Bohr Chain Integration
+## 6. BOT Chain Mainnet Integration
 
-Bohr Chain was selected as the deployment environment due to its high-throughput EVM execution and cost-efficient gas structure:
+BOT Chain was selected as the deployment environment due to its high-throughput EVM execution and cost-efficient gas structure for AI agents and DePIN:
 
-- **Network Name**: Bohr Testnet
-- **Chain ID**: `968`
-- **RPC URL**: `https://rpc.bohr.life`
+- **Network Name**: BOT Chain Mainnet
+- **Chain ID**: `677`
+- **RPC URL**: `https://rpc.botchain.ai`
 - **Native Gas Token**: `BOT`
-- **Block Explorer**: `https://scan.bohr.life/`
-- **Deployed Contract**: `0x4f94b30803f2b34630D427E452c85547Df5A6274`
+- **Official Website**: `https://botchain.ai`
+- **Block Explorer**: `https://scan.botchain.ai`
+- **Deployed & Verified Contract**: `0x8A1fA6aC2442231B0D7C9250683C335713F21f7f`
 
 ---
 
@@ -171,4 +172,4 @@ Bohr Chain was selected as the deployment environment due to its high-throughput
 
 ## 8. Summary
 
-HolderLens bridges the critical gap between raw on-chain data and actionable token intelligence. By anchoring verification checks and snapshot summaries directly onto Bohr Chain, HolderLens transforms token holder analytics into an auditable, decentralized public utility.
+HolderLens bridges the critical gap between raw on-chain data and actionable token intelligence. By anchoring verification checks and snapshot summaries directly onto BOT Chain, HolderLens transforms token holder analytics into an auditable, decentralized public utility.

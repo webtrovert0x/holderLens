@@ -3,14 +3,14 @@
 import React from 'react';
 import { useAccount, useConnect, useDisconnect, useBalance } from 'wagmi';
 import { useAppConfig } from '@/context/Web3Provider';
-import { ShieldCheck, Wallet, ExternalLink, Activity, Sparkles, LogOut } from 'lucide-react';
-import { bohrTestnet } from '@/lib/chain';
+import { ShieldCheck, Wallet, ExternalLink, LogOut } from 'lucide-react';
+import { botchain } from '@/lib/chain';
 
 export default function Navbar() {
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const { connectors, connect } = useConnect();
-  const { data: balanceData } = useBalance({ address, chainId: bohrTestnet.id });
+  const { data: balanceData } = useBalance({ address, chainId: botchain.id });
   const { contractAddress, explorerUrl } = useAppConfig();
 
   const handleConnect = () => {
@@ -29,26 +29,26 @@ export default function Navbar() {
   return (
     <header style={{
       borderBottom: '1px solid var(--border-subtle)',
-      background: 'rgba(7, 9, 14, 0.8)',
+      background: 'rgba(7, 9, 14, 0.85)',
       backdropFilter: 'blur(12px)',
       position: 'sticky',
       top: 0,
       zIndex: 50,
-      padding: '16px 0',
+      padding: '14px 0',
     }}>
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
         {/* Logo and Brand */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <img
             src="/logo.png"
-            alt="HolderLens Logo"
+            alt="HolderLens Official Logo"
             style={{
-              width: '42px',
-              height: '42px',
-              borderRadius: '12px',
+              width: '40px',
+              height: '40px',
+              borderRadius: '10px',
               objectFit: 'cover',
               boxShadow: 'var(--glow-cyan)',
-              border: '1px solid rgba(56, 189, 248, 0.3)',
+              border: '1px solid rgba(56, 189, 248, 0.35)',
             }}
           />
           <div>
@@ -65,40 +65,37 @@ export default function Navbar() {
                 color: 'var(--accent-cyan)',
                 border: '1px solid rgba(56, 189, 248, 0.25)',
               }}>
-                v1.0
+                MAINNET
               </span>
             </div>
             <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-              Bohr Chain Token Distribution Analytics
+              BOT Chain Token Distribution Analytics
             </p>
           </div>
         </div>
 
         {/* Network & Wallet Controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          {/* Bohr Chain Badge */}
+          {/* BOT Chain Badge */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            padding: '6px 12px',
+            padding: '6px 14px',
             borderRadius: 'var(--radius-full)',
             background: 'rgba(16, 185, 129, 0.08)',
             border: '1px solid rgba(16, 185, 129, 0.2)',
             fontSize: '0.8rem',
             color: 'var(--accent-emerald)',
           }}>
-            <span style={{
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              background: 'var(--accent-emerald)',
-              boxShadow: '0 0 8px var(--accent-emerald)',
-              display: 'inline-block',
-            }} />
-            <span style={{ fontWeight: 600 }}>Bohr Testnet</span>
+            <img
+              src="/botchain-logo.png"
+              alt="BOT Chain Logo"
+              style={{ width: '14px', height: '14px', borderRadius: '3px', objectFit: 'contain' }}
+            />
+            <span style={{ fontWeight: 600 }}>BOT Chain</span>
             <span style={{ color: 'var(--text-muted)' }}>|</span>
-            <span className="font-mono" style={{ fontSize: '0.75rem' }}>ID: 968</span>
+            <span className="font-mono" style={{ fontSize: '0.75rem' }}>ID: 677</span>
           </div>
 
           {/* Contract Status Link */}

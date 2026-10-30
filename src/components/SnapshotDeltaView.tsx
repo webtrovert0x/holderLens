@@ -5,7 +5,7 @@ import { TokenHolderReport } from '@/lib/holder-service';
 import { useAccount, useWriteContract } from 'wagmi';
 import { useAppConfig } from '@/context/Web3Provider';
 import { HOLDERLENS_ABI } from '@/contract/HolderLensABI';
-import { bohrTestnet } from '@/lib/chain';
+import { botchain } from '@/lib/chain';
 import { keccak256, toHex } from 'viem';
 import { 
   History, 
@@ -64,7 +64,7 @@ export default function SnapshotDeltaView({ data }: SnapshotDeltaViewProps) {
           BigInt(bps),
           snapshotHash,
         ],
-        chainId: bohrTestnet.id,
+        chainId: botchain.id,
       } as any);
 
       setAnchorTxHash(hash);
@@ -102,7 +102,7 @@ export default function SnapshotDeltaView({ data }: SnapshotDeltaViewProps) {
           <div>
             <h3 style={{ fontSize: '1.2rem', fontWeight: 800 }}>Snapshot Deltas & Audit Trail</h3>
             <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-              Tracking distribution drift and anchoring cryptographic summaries on Bohr Chain
+              Tracking distribution drift and anchoring cryptographic summaries on BOT Chain
             </p>
           </div>
         </div>
@@ -229,7 +229,7 @@ export default function SnapshotDeltaView({ data }: SnapshotDeltaViewProps) {
           gap: '8px',
         }}>
           <CheckCircle2 size={16} />
-          <span>Snapshot successfully anchored on Bohr Chain:</span>
+          <span>Snapshot successfully anchored on BOT Chain:</span>
           <a
             href={`${explorerUrl}/tx/${anchorTxHash}`}
             target="_blank"

@@ -1,6 +1,8 @@
 {
-  "address": "0x4f94b30803f2b34630D427E452c85547Df5A6274",
-  "network": "bohrTestnet",
-  "chainId": 968,
-  "deployedAt": "2026-10-24T15:32:55.181Z"
+  "address": "0x8A1fA6aC2442231B0D7C9250683C335713F21f7f",
+  "network": "botchain",
+  "chainId": 677,
+  "deployedAt": "2026-10-30T12:52:27.747Z",
+  "txHash": "0xbb51d62068d2fae2508cabb75981af7b9eabf2a00a50e334c222f840a4154f9d",
+  "explorerUrl": "https://scan.botchain.ai/address/0x8A1fA6aC2442231B0D7C9250683C335713F21f7f"
 }

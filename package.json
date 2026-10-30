@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3005",
+    "dev": "next dev -p 3006",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3006",
     "compile": "hardhat compile",
-    "deploy": "hardhat run scripts/deploy.js --network bohrTestnet",
+    "deploy": "hardhat run scripts/deploy.js --network botchain",
+    "verify": "hardhat verify --network botchain",
     "test": "hardhat test"
   },
   "dependencies": {

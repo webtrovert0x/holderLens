@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
   } catch (error: any) {
     console.error('Error fetching holder analytics:', error);
     return NextResponse.json(
-      { error: error?.message || 'Failed to analyze token holders on Bohr Chain' },
+      { error: error?.message || 'Failed to analyze token holders on BOT Chain' },
       { status: 500 }
     );
   }

@@ -1,26 +1,29 @@
 import { defineChain } from 'viem';
 
-export const bohrTestnet = defineChain({
-  id: 968,
-  name: 'Bohr Testnet',
+export const botchain = defineChain({
+  id: 677,
+  name: 'BOT Chain',
   nativeCurrency: {
     decimals: 18,
-    name: 'Bohr Token',
+    name: 'BOT',
     symbol: 'BOT',
   },
   rpcUrls: {
     default: {
-      http: ['https://rpc.bohr.life'],
+      http: ['https://rpc.botchain.ai'],
     },
     public: {
-      http: ['https://rpc.bohr.life'],
+      http: ['https://rpc.botchain.ai'],
     },
   },
   blockExplorers: {
     default: {
-      name: 'BohrScan',
-      url: 'https://scan.bohr.life',
+      name: 'BOTScan',
+      url: 'https://scan.botchain.ai',
     },
   },
-  testnet: true,
+  testnet: false,
 });
+
+// Alias for backwards-compatibility
+export const bohrTestnet = botchain;

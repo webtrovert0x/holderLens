@@ -143,7 +143,7 @@ export default function MetricsOverview({ data }: MetricsOverviewProps) {
                 target="_blank"
                 rel="noreferrer"
                 style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center' }}
-                title="View on BohrScan"
+                title="View on BOTScan"
               >
                 <ExternalLink size={14} />
               </a>

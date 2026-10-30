@@ -8,7 +8,7 @@ import ConcentrationBreakdown from '@/components/ConcentrationBreakdown';
 import TopHoldersTable from '@/components/TopHoldersTable';
 import SnapshotDeltaView from '@/components/SnapshotDeltaView';
 import { TokenHolderReport } from '@/lib/holder-service';
-import { ShieldCheck, BarChart3, Database, Layers, ArrowRight } from 'lucide-react';
+import { ShieldCheck, BarChart3, Database, Layers } from 'lucide-react';
 import { useAppConfig } from '@/context/Web3Provider';
 
 export default function HomePage() {
@@ -19,6 +19,7 @@ export default function HomePage() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <div className="ambient-glow" />
+
       <Navbar />
 
       <main className="container" style={{ flex: 1, padding: '36px 24px 64px' }}>
@@ -52,10 +53,10 @@ export default function HomePage() {
           <div style={{ marginTop: '24px' }}>
             <div style={{ textAlign: 'center', marginBottom: '32px' }}>
               <h2 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '8px' }}>
-                How HolderLens Works
+                How HolderLens Works on BOT Chain
               </h2>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', maxWidth: '640px', margin: '0 auto' }}>
-                Designed for traders, analysts, and communities on Bohr Chain to detect token centralization and whale movements before trading.
+                Designed for traders, analysts, and communities on BOT Chain to detect token centralization and whale movements before trading.
               </p>
             </div>
 
@@ -82,7 +83,7 @@ export default function HomePage() {
                   Largest Token Holders
                 </h3>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                  Live indexed holder balances, sorting wallets by size, identifying smart contracts vs personal EOAs, and flagging burn addresses.
+                  Live indexed holder balances on BOT Chain, sorting wallets by size, identifying smart contracts vs personal EOAs, and flagging burn addresses.
                 </p>
               </div>
 
@@ -135,7 +136,7 @@ export default function HomePage() {
                   width: '40px',
                   height: '40px',
                   borderRadius: '10px',
-                  background: 'rgba(16, 185, 129, 0.12)',
+                  background: 'rgba(168, 85, 247, 0.12)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -148,7 +149,7 @@ export default function HomePage() {
                   On-Chain Verifiability
                 </h3>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                  Sends an immutable audit check to the deployed Solidity contract on Bohr Chain. Zero protocol fees, user pays only standard network gas.
+                  Sends an immutable audit check to the deployed Solidity contract on BOT Chain. Zero protocol fees, user pays only standard network gas.
                 </p>
               </div>
             </div>
@@ -156,26 +157,97 @@ export default function HomePage() {
         )}
       </main>
 
-      {/* Footer */}
+      {/* Footer: BOT Chain name visible, clickable links with original botchain logo in front */}
       <footer style={{
         borderTop: '1px solid var(--border-subtle)',
-        background: 'rgba(7, 9, 14, 0.9)',
-        padding: '24px 0',
-        fontSize: '0.82rem',
+        background: 'rgba(7, 9, 14, 0.95)',
+        padding: '28px 0',
+        fontSize: '0.85rem',
         color: 'var(--text-muted)',
       }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-          <div>
-            HolderLens &copy; {new Date().getFullYear()} — Token holder distribution analytics engine.
+        <div className="container" style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '20px',
+        }}>
+          {/* Brand & BOT Chain Name */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <img
+              src="/botchain-logo.png"
+              alt="BOT Chain Logo"
+              style={{ width: '24px', height: '24px', borderRadius: '4px', objectFit: 'contain' }}
+            />
+            <span>
+              HolderLens &copy; {new Date().getFullYear()} — Token holder distribution analytics on <strong style={{ color: 'var(--text-primary)' }}>BOT Chain</strong>
+            </span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <a href={explorerUrl} target="_blank" rel="noreferrer" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
-              BohrScan Explorer
+
+          {/* Clickable links with original botchain logo in the front */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
+            {/* Clickable link 1: https://botchain.ai with original botchain logo in the front */}
+            <a
+              href="https://botchain.ai"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: 'var(--accent-cyan)',
+                textDecoration: 'none',
+                fontWeight: 600,
+                padding: '6px 12px',
+                borderRadius: 'var(--radius-full)',
+                background: 'rgba(56, 189, 248, 0.08)',
+                border: '1px solid rgba(56, 189, 248, 0.2)',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              <img
+                src="/botchain-logo.png"
+                alt="BOT Chain Logo"
+                style={{ width: '18px', height: '18px', borderRadius: '3px', objectFit: 'contain' }}
+              />
+              <span>https://botchain.ai</span>
             </a>
-            <span>&bull;</span>
-            <span>Chain ID: 968</span>
-            <span>&bull;</span>
-            <span>Native Currency: BOT</span>
+
+            {/* Clickable link 2: https://scan.botchain.ai with original botchain logo in the front */}
+            <a
+              href="https://scan.botchain.ai"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: 'var(--accent-cyan)',
+                textDecoration: 'none',
+                fontWeight: 600,
+                padding: '6px 12px',
+                borderRadius: 'var(--radius-full)',
+                background: 'rgba(56, 189, 248, 0.08)',
+                border: '1px solid rgba(56, 189, 248, 0.2)',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              <img
+                src="/botchain-logo.png"
+                alt="BOT Chain Logo"
+                style={{ width: '18px', height: '18px', borderRadius: '3px', objectFit: 'contain' }}
+              />
+              <span>https://scan.botchain.ai</span>
+            </a>
+
+            <span style={{ color: 'var(--border-subtle)' }}>|</span>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              Chain ID: <strong style={{ color: 'var(--text-primary)' }}>677</strong>
+            </span>
+            <span style={{ color: 'var(--border-subtle)' }}>|</span>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              Native Token: <strong style={{ color: 'var(--text-primary)' }}>BOT</strong>
+            </span>
           </div>
         </div>
       </footer>

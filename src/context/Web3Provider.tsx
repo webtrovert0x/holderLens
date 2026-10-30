@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { WagmiProvider, createConfig, http, injected } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { bohrTestnet } from '@/lib/chain';
+import { botchain } from '@/lib/chain';
 import { createAppKit } from '@reown/appkit/react';
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
 
@@ -20,8 +20,8 @@ interface AppConfigContextType {
 export const AppConfigContext = createContext<AppConfigContextType>({
   projectId: '',
   contractAddress: '',
-  explorerUrl: 'https://scan.bohr.life',
-  rpcUrl: 'https://rpc.bohr.life',
+  explorerUrl: 'https://scan.botchain.ai',
+  rpcUrl: 'https://rpc.botchain.ai',
   isReady: false,
 });
 
@@ -31,8 +31,8 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
   const [config, setConfig] = useState<AppConfigContextType>({
     projectId: '',
     contractAddress: '',
-    explorerUrl: 'https://scan.bohr.life',
-    rpcUrl: 'https://rpc.bohr.life',
+    explorerUrl: 'https://scan.botchain.ai',
+    rpcUrl: 'https://rpc.botchain.ai',
     isReady: false,
   });
 
@@ -47,8 +47,8 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
         setConfig({
           projectId: data.projectId || '',
           contractAddress: data.contractAddress || '',
-          explorerUrl: data.explorerUrl || 'https://scan.bohr.life',
-          rpcUrl: data.rpcUrl || 'https://rpc.bohr.life',
+          explorerUrl: data.explorerUrl || 'https://scan.botchain.ai',
+          rpcUrl: data.rpcUrl || 'https://rpc.botchain.ai',
           isReady: true,
         });
 
@@ -58,18 +58,18 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
             const wagmiAdapter = new WagmiAdapter({
               ssr: true,
               projectId: data.projectId,
-              networks: [bohrTestnet],
+              networks: [botchain],
             });
 
             createAppKit({
               adapters: [wagmiAdapter],
-              networks: [bohrTestnet],
+              networks: [botchain],
               projectId: data.projectId,
               metadata: {
                 name: 'HolderLens',
-                description: 'Token holder analytics on Bohr Chain',
+                description: 'Token holder analytics on BOT Chain',
                 url: typeof window !== 'undefined' ? window.location.origin : 'https://holderlens.app',
-                icons: ['https://scan.bohr.life/assets/configs/network_icon.png'],
+                icons: ['https://scan.botchain.ai/assets/favicon/apple-touch-icon-180x180.png'],
               },
               features: {
                 analytics: false,
@@ -86,9 +86,9 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
 
         // Fallback standard Wagmi config with injected connectors
         const fallbackConfig = createConfig({
-          chains: [bohrTestnet],
+          chains: [botchain],
           transports: {
-            [bohrTestnet.id]: http(data.rpcUrl || 'https://rpc.bohr.life'),
+            [botchain.id]: http(data.rpcUrl || 'https://rpc.botchain.ai'),
           },
           connectors: [
             injected({ target: 'metaMask' }),
@@ -100,9 +100,9 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
         console.error('Failed to load server config:', err);
         // Default standalone wagmi config
         const defaultWagmi = createConfig({
-          chains: [bohrTestnet],
+          chains: [botchain],
           transports: {
-            [bohrTestnet.id]: http('https://rpc.bohr.life'),
+            [botchain.id]: http('https://rpc.botchain.ai'),
           },
           connectors: [injected()],
         });

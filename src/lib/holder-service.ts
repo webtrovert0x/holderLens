@@ -1,5 +1,5 @@
 import { createPublicClient, http, formatUnits, isAddress } from 'viem';
-import { bohrTestnet } from './chain';
+import { botchain } from './chain';
 import { ERC20_ABI, HOLDERLENS_ABI } from '../contract/HolderLensABI';
 import fs from 'fs';
 import path from 'path';
@@ -94,18 +94,27 @@ function saveSnapshotRecord(token: string, record: any) {
   }
 }
 
+const DEFAULT_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  'Accept': 'application/json, text/plain, */*',
+};
+
 export async function fetchTokenHolderData(tokenAddress: string): Promise<TokenHolderReport> {
   if (!isAddress(tokenAddress)) {
-    throw new Error('Invalid Ethereum / Bohr token address format.');
+    throw new Error('Invalid Ethereum / BOT Chain token address format.');
   }
 
-  const rpcUrl = process.env.RPC_URL || 'https://rpc.bohr.life';
-  const explorerBase = process.env.EXPLORER_URL || 'https://scan.bohr.life';
+  const rpcUrl = process.env.RPC_URL || 'https://rpc.botchain.ai';
+  const explorerBase = process.env.EXPLORER_URL || 'https://scan.botchain.ai';
   const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
 
   const publicClient = createPublicClient({
-    chain: bohrTestnet,
-    transport: http(rpcUrl),
+    chain: botchain,
+    transport: http(rpcUrl, {
+      fetchOptions: {
+        headers: DEFAULT_HEADERS,
+      },
+    }),
   });
 
   // 1. Fetch ERC20 Details via RPC
@@ -146,13 +155,13 @@ export async function fetchTokenHolderData(tokenAddress: string): Promise<TokenH
     console.warn('Could not read standard ERC20 metadata via RPC:', err);
   }
 
-  // 2. Query Bohr Scan Blockscout v2 API for real token holders
+  // 2. Query BOT Chain Scan Blockscout v2 API for real token holders
   let rawHoldersList: { address: string; isContract: boolean; balance: bigint }[] = [];
   let apiTotalHolders = 0;
 
   try {
     const apiUrl = `${explorerBase}/api/v2/tokens/${tokenAddress}/holders`;
-    const res = await fetch(apiUrl, { cache: 'no-store' });
+    const res = await fetch(apiUrl, { cache: 'no-store', headers: DEFAULT_HEADERS });
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data.items)) {
@@ -165,7 +174,7 @@ export async function fetchTokenHolderData(tokenAddress: string): Promise<TokenH
     }
 
     // Also get token stats from explorer if available
-    const tokenInfoRes = await fetch(`${explorerBase}/api/v2/tokens/${tokenAddress}`, { cache: 'no-store' });
+    const tokenInfoRes = await fetch(`${explorerBase}/api/v2/tokens/${tokenAddress}`, { cache: 'no-store', headers: DEFAULT_HEADERS });
     if (tokenInfoRes.ok) {
       const tokenInfo = await tokenInfoRes.json();
       if (tokenInfo.holders) apiTotalHolders = Number(tokenInfo.holders);
@@ -177,7 +186,7 @@ export async function fetchTokenHolderData(tokenAddress: string): Promise<TokenH
       }
     }
   } catch (apiErr) {
-    console.warn('BohrScan API fetch failed or was empty, falling back to on-chain logs:', apiErr);
+    console.warn('BOTScan API fetch failed or was empty, falling back to on-chain logs:', apiErr);
   }
 
   // Fallback: If Blockscout returned no holders, inspect Transfer events from RPC

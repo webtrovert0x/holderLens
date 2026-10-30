@@ -6,7 +6,7 @@ import { isAddress } from 'viem';
 import { Search, Loader2, Sparkles, CheckCircle2, AlertCircle, ExternalLink, Zap, Fuel, ShieldAlert } from 'lucide-react';
 import { useAppConfig } from '@/context/Web3Provider';
 import { HOLDERLENS_ABI } from '@/contract/HolderLensABI';
-import { bohrTestnet } from '@/lib/chain';
+import { botchain } from '@/lib/chain';
 
 interface TokenSearchProps {
   onDataFetched: (data: any) => void;
@@ -25,10 +25,11 @@ export default function TokenSearch({ onDataFetched, isLoading, setIsLoading }: 
   const { writeContractAsync } = useWriteContract();
   const publicClient = usePublicClient();
 
-  // Known active tokens on Bohr Testnet for 1-click testing
+  // Known active tokens on BOT Chain for 1-click testing
   const sampleTokens = [
-    { name: 'Tether USD', symbol: 'USDT', address: '0x75edC9335175Fc0552D51D48439F229c10420fe3' },
-    { name: 'Test Doge', symbol: 'Doge', address: '0x742c9857EeD423aF04858A375DAa0Dad31539fae' },
+    { name: 'Wrapped BOT', symbol: 'WBOT', address: '0xD5452816194a3784dBa983426cCe7c122F4abd30' },
+    { name: 'Tether USD', symbol: 'USDT', address: '0xaBabc7Ddc03e501d190C676BF3d92ef0e6e87a3C' },
+    { name: 'BotChain Test Token', symbol: 'BTT', address: '0x8b559c7049eD44f2e3e5Db54E2B72C33f23F6D43' },
   ];
 
   const fetchHoldersData = async (targetToken: string) => {
@@ -72,7 +73,7 @@ export default function TokenSearch({ onDataFetched, isLoading, setIsLoading }: 
 
     // MANDATORY 2: Contract Must Be Deployed
     if (!contractAddress) {
-      setErrorMsg('HolderLens contract is not yet deployed on Bohr Testnet! Run "npm run deploy" to deploy the contract and enable on-chain checks.');
+      setErrorMsg('HolderLens contract is not yet deployed on BOT Chain! Run "npm run deploy" to deploy the contract and enable on-chain checks.');
       return;
     }
 
@@ -88,11 +89,11 @@ export default function TokenSearch({ onDataFetched, isLoading, setIsLoading }: 
         abi: HOLDERLENS_ABI,
         functionName: 'recordHolderCheck',
         args: [cleanAddress as `0x${string}`],
-        chainId: bohrTestnet.id,
+        chainId: botchain.id,
       } as any);
 
       setTxHash(hash);
-      setStatusMessage('Transaction submitted to Bohr Testnet. Awaiting block confirmation (gas fee paid)...');
+      setStatusMessage('Transaction submitted to BOT Chain. Awaiting block confirmation (gas fee paid)...');
 
       if (publicClient) {
         await publicClient.waitForTransactionReceipt({ hash });
@@ -108,7 +109,6 @@ export default function TokenSearch({ onDataFetched, isLoading, setIsLoading }: 
       setStatusMessage('');
       const reason = txErr?.shortMessage || txErr?.message || 'Transaction rejected';
       setErrorMsg(`Gas transaction failed or rejected: ${reason}. Paying the on-chain gas fee is required to check holders.`);
-      // Strict halt: Do NOT fetch or display holder data without confirmed tx!
     }
   };
 
@@ -132,7 +132,7 @@ export default function TokenSearch({ onDataFetched, isLoading, setIsLoading }: 
           lineHeight: 1.6,
           marginBottom: '24px',
         }}>
-          Analyze whale concentration, top 10 supply control, and historical distribution shifts on Bohr Chain.
+          Analyze whale concentration, top 10 supply control, and historical distribution shifts on BOT Chain.
           Submits an audit record on-chain via smart contract (gas fee required, 0 service fee).
         </p>
 
@@ -153,7 +153,7 @@ export default function TokenSearch({ onDataFetched, isLoading, setIsLoading }: 
           <input
             type="text"
             id="token-address-input"
-            placeholder="Enter Bohr ERC-20 token address (0x...)"
+            placeholder="Enter BOT Chain ERC-20 token address (0x...)"
             value={tokenAddress}
             onChange={(e) => {
               setTokenAddress(e.target.value);
@@ -285,7 +285,7 @@ export default function TokenSearch({ onDataFetched, isLoading, setIsLoading }: 
             gap: '8px',
           }}>
             <CheckCircle2 size={16} />
-            <span>Check recorded on Bohr Chain (Gas Paid):</span>
+            <span>Check recorded on BOT Chain (Gas Paid):</span>
             <a
               href={`${explorerUrl}/tx/${txHash}`}
               target="_blank"
